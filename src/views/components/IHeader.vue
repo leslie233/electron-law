@@ -12,6 +12,7 @@
       <button class="icon flex-center" @click="openNewWindow" title="新窗口">
         <i class="iconfont flex-center icon-add"></i>
       </button>
+      <div @click="goAddCase">新建案件</div>
     </template>
     <!-- 标题拖动 -->
     <div class="drag-header flex1 flex-center" :style="computedPaddingLeft">
@@ -56,7 +57,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue';
-import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import { browserWindowOption } from '@/config';
 import { createBrowserWindow, transitCloseWindow } from '@/utils';
 import { remote } from 'electron';
@@ -64,6 +65,7 @@ import { remote } from 'electron';
 export default defineComponent({
   emits: ['option-click', 'on-close'],
   setup(props, { emit }) {
+    const router = useRouter()
     const editorWinOptions = browserWindowOption('editor');
     // 打开新窗口
     const openNewWindow = () => {
@@ -112,6 +114,13 @@ export default defineComponent({
       transitCloseWindow();
     };
 
+    // 新建案件
+    const goAddCase = () => {
+      router.push({
+        name: 'addCase',
+      })
+    };
+
     return {
       openNewWindow,
       currentRouteName,
@@ -121,6 +130,7 @@ export default defineComponent({
       computedPaddingLeft,
       isAlwaysOnTop,
       title,
+      goAddCase,
       // 只在windows上显示
       platformWindows: process.platform === 'win32'
     };

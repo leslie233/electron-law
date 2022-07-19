@@ -1,4 +1,5 @@
 import { sequelize } from './initSequelize';
 import { Notes } from './modles/Notes';
+import { Case } from './modles/Case';
 
-export { sequelize, Notes };
+export { sequelize, Notes, Case };

@@ -125,7 +125,7 @@ body,
 }
 
 body {
-  padding: 4px;
+  /* padding: 4px; */
   user-select: none;
   outline: none;
 }
@@ -242,4 +242,8 @@ body {
 }
 .page-editor:not(.white-content) .vditor-reset hr {
   background-color: #d2d2d2 !important;
+}
+
+.icon-pointer {
+  cursor: pointer;
 }

@@ -14,6 +14,7 @@ module.exports = {
     ecmaVersion: 2020
   },
   rules: {
+    "@typescript-eslint/no-explicit-any": ["off"],
     // '@typescript-eslint/explicit-module-boundary-types': 0,
     // '@typescript-eslint/no-non-null-assertion': 0,
     // '@typescript-eslint/camelcase': 0,

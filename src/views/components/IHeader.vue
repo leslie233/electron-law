@@ -9,10 +9,20 @@
     </template>
     <template v-else>
       <!-- 打开新窗口 -->
-      <button class="icon flex-center" @click="openNewWindow" title="新窗口">
+      <!-- <button class="icon flex-center" @click="openNewWindow" title="新窗口">
         <i class="iconfont flex-center icon-add"></i>
-      </button>
-      <div @click="goAddCase">新建案件</div>
+      </button> -->
+      <!-- <div class="icon-pointer icon flex-center" style="width:unset" @click="goHome">
+        <el-icon><House /></el-icon>
+        <span style="font-size:14px">首页</span>
+      </div> -->
+      <!-- 案件管理 -->
+      <!-- <div class="icon-pointer icon flex-center" style="width:unset;margin-left:5px" @click="goCase">
+        <el-icon><Document /></el-icon>
+        <span style="font-size:14px">案件管理</span>
+      </div> -->
+      <div style="width:120px">
+      </div>
     </template>
     <!-- 标题拖动 -->
     <div class="drag-header flex1 flex-center" :style="computedPaddingLeft">
@@ -23,14 +33,14 @@
     <!-- 右侧操作 -->
     <div class="operation-btn flex-items">
       <!-- 设置 -->
-      <template v-if="currentRouteName === 'index'">
+      <!-- <template v-if="currentRouteName === 'index'">
         <button class="icon flex-center" title="设置">
           <router-link class="flex-center" to="/setting">
             <i class="iconfont flex-center icon-setting"></i>
           </router-link>
         </button>
-      </template>
-      <template v-else-if="currentRouteName === 'editor'">
+      </template> -->
+      <template v-if="currentRouteName === 'editor'">
         <!-- 固定 -->
         <div class="thepin" :class="isAlwaysOnTop ? 'thepin-active' : ''">
           <div class="absolute-box">
@@ -47,19 +57,19 @@
           <i class="iconfont flex-center icon-more"></i>
         </button>
       </template>
+      <el-icon class="icon flex-center icon-pointer" color="#fff" @click="miniScreen"><Minus /></el-icon>
+      <el-icon class="icon flex-center icon-pointer" color="#fff" @click="fullScreen"><FullScreen /></el-icon>
       <!-- 关闭 -->
-      <button v-if="platformWindows" class="icon flex-center close-window" @click="closeWindow" title="关闭">
-        <i class="iconfont flex-center icon-close"></i>
-      </button>
+      <el-icon v-if="platformWindows" class="icon flex-center icon-pointer" color="#fff" @click="closeWindow"><Close /></el-icon>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import { browserWindowOption } from '@/config';
-import { createBrowserWindow, transitCloseWindow } from '@/utils';
+import { createBrowserWindow, transitCloseWindow, setFullScreen, setMinimize } from '@/utils';
 import { remote } from 'electron';
 
 export default defineComponent({
@@ -114,13 +124,26 @@ export default defineComponent({
       transitCloseWindow();
     };
 
-    // 新建案件
-    const goAddCase = () => {
+    // 案件管理
+    const goCase = () => {
       router.push({
-        name: 'addCase',
+        name: 'case',
       })
     };
-
+    // 返回首页
+    const goHome = () => {
+      router.push({
+        name: 'index',
+      })
+    };
+    // 全屏
+    const fullScreen = () => {
+      setFullScreen()
+    }
+    // 最小化
+    const miniScreen = () => {
+      setMinimize()
+    }
     return {
       openNewWindow,
       currentRouteName,
@@ -130,7 +153,10 @@ export default defineComponent({
       computedPaddingLeft,
       isAlwaysOnTop,
       title,
-      goAddCase,
+      goCase,
+      fullScreen,
+      miniScreen,
+      goHome,
       // 只在windows上显示
       platformWindows: process.platform === 'win32'
     };
@@ -164,7 +190,7 @@ export default defineComponent({
 
 .header {
   height: @iconSize;
-  background-color: @white-color;
+  background-color: #409eff;
   button {
     padding: 0;
     outline: none;
@@ -203,7 +229,7 @@ export default defineComponent({
     height: 36px;
     margin-top: 5px;
     padding-bottom: 5px;
-    color: @text-sub-color;
+    color: #fff;
     font-size: 15px;
     font-weight: bold;
     box-sizing: border-box;

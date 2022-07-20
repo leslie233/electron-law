@@ -53,6 +53,16 @@ export const transitCloseWindow = (): void => {
   remote.getCurrentWindow().close();
 };
 
+// 全屏
+export const setFullScreen = (): void => {
+  remote.getCurrentWindow().setFullScreen(true);
+};
+
+// 最小化
+export const setMinimize = (): void => {
+  remote.getCurrentWindow().minimize();
+};
+
 // uuid
 export const uuid = (): string => {
   const S4 = () => {

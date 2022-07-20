@@ -1,3 +1,11 @@
+/*
+ * @Author: zhh zhanghaohan@boulderai.com
+ * @Date: 2022-07-19 11:39:16
+ * @LastEditors: zhh zhanghaohan@boulderai.com
+ * @LastEditTime: 2022-07-20 13:24:44
+ * @FilePath: \electron-vue3-inote\src\config\electronConfig.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { Task } from 'electron';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -44,8 +52,10 @@ export const disabledKeys = () => {
  * @param type 单独给编辑窗口的配置
  */
 export const browserWindowOption = (type?: 'editor'): Electron.BrowserWindowConstructorOptions => {
-  const devWid = isDevelopment ? 950 : 0;
-  const devHei = isDevelopment ? 600 : 0;
+  // const devWid = isDevelopment ? 1000 : 0;
+  // const devHei = isDevelopment ? 650 : 0;
+  const devWid = 1000;
+  const devHei = 650;
 
   // 底部icon: 40*40
   const editorWindowOptions = {
@@ -74,9 +84,9 @@ export const browserWindowOption = (type?: 'editor'): Electron.BrowserWindowCons
   }
   if (!type) {
     return {
-      width: devWid || 350,
+      width: devWid || 500,
       height: devHei || 600,
-      minWidth: 320,
+      minWidth: 350,
       ...commonOptions,
       resizable: isDevelopment ? true : false
     };

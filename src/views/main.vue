@@ -1,9 +1,10 @@
 <template>
   <IHeader v-if="routeName !== 'editor'" />
-  <div class="bg-white">
+  <div class="bg-white" style="display:flex;">
+    <ILeft />
     <router-view v-slot="{ Component }">
       <transition name="main-fade">
-        <div class="transition" :key="routeName" :data-title="routeName">
+        <div class="transition" :key="routeName" :data-title="routeName" style="flex:1;padding: 15px;">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
@@ -17,6 +18,7 @@
 import { ref, onBeforeUpdate } from 'vue';
 import { useRoute } from 'vue-router';
 import IHeader from './components/IHeader.vue';
+import ILeft from './components/ILeft.vue';
 
 const routeName = ref(useRoute().name as string);
 

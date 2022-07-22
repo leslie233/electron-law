@@ -212,6 +212,7 @@ export default defineComponent({
             raw: true
           }).then(() => {
             ElNotification.success('案件受理成功')
+            goCase()
           }).catch(() => {
             ElNotification.error('案件受理失败!')
           })

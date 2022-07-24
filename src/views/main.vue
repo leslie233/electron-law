@@ -4,7 +4,7 @@
     <ILeft />
     <router-view v-slot="{ Component }">
       <transition name="main-fade">
-        <div class="transition" :key="routeName" :data-title="routeName" style="flex:1;padding: 15px;">
+        <div class="transition" :key="routeName" :data-title="routeName" style="flex:1;padding: 15px 15px 50px 15px;overflow-y:scroll;">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>

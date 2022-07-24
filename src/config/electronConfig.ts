@@ -88,7 +88,7 @@ export const browserWindowOption = (type?: 'editor'): Electron.BrowserWindowCons
       height: devHei || 600,
       minWidth: 350,
       ...commonOptions,
-      resizable: isDevelopment ? true : false
+      resizable: true,
     };
   }
   return {

@@ -13,9 +13,24 @@
       <span style="font-size:14px;margin-left:5px;">首页</span>
     </div>
     <!-- 案件管理 -->
-    <div class="icon-pointer icon flex-items" style="width:unset;padding-left:5px;" @click="goCase">
+    <div class="icon-pointer icon flex-items" style="width:unset;padding-left:5px;" @click="goPage('case')">
       <el-icon><Document /></el-icon>
       <span style="font-size:14px;margin-left:5px;">案件管理</span>
+    </div>
+    <!-- 客户管理 -->
+    <div class="icon-pointer icon flex-items" style="width:unset;padding-left:5px;" @click="goPage('custom')">
+      <el-icon><User /></el-icon>
+      <span style="font-size:14px;margin-left:5px;">客户管理</span>
+    </div>
+    <!-- 法官管理 -->
+    <div class="icon-pointer icon flex-items" style="width:unset;padding-left:5px;" @click="goPage('judge')">
+      <el-icon><Avatar /></el-icon>
+      <span style="font-size:14px;margin-left:5px;">法官管理</span>
+    </div>
+    <!-- 财务收支 -->
+    <div class="icon-pointer icon flex-items" style="width:unset;padding-left:5px;" @click="goPage('finance')">
+      <el-icon><Money /></el-icon>
+      <span style="font-size:14px;margin-left:5px;">财务收支</span>
     </div>
   </header>
 </template>
@@ -28,20 +43,19 @@ export default defineComponent({
   emits: ['option-click', 'on-close'],
   setup() {
     const router = useRouter()
-    // 案件管理
-    const goCase = () => {
+    const goPage = (page:string) => {
       router.push({
-        name: 'case',
+        name: page,
       })
     };
     // 返回首页
     const goHome = () => {
       router.push({
-        name: 'index',
+        name: 'home',
       })
     };
     return {
-      goCase,
+      goPage,
       goHome,
     };
   }

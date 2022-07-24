@@ -17,6 +17,7 @@ export interface CaseModelType {
   caseType?: string; // 案件类型
   caseReason?: string; // 案由
   client?: string; // 委托人
+  clientFrom?: string; // 委托人是
   parties?: string; // 对方当事人
   thirdPerson?: string; // 第三人
   caseAmount?: number; // 诉讼标的
@@ -34,6 +35,8 @@ export interface CaseModelType {
   lawer?: string; // 合办律师
   source?: string; // 案件来源
   remark?: string; // 备注
+  status?: string; // 状态
+  isDelete?: boolean;
 }
 
 /**
@@ -45,6 +48,7 @@ export interface DBCaseType {
   caseType?: string;
   caseReason?: string;
   client?: string;
+  clientFrom?: string;
   parties?: string;
   thirdPerson?: string;
   caseAmount?: number;
@@ -62,8 +66,10 @@ export interface DBCaseType {
   lawer?: string;
   source?: string;
   remark?: string;
+  status?: string;
   readonly createdAt: Date;
   updatedAt: Date;
+  isDelete?: boolean;
 }
 
 /**

@@ -8,11 +8,11 @@
  */
 import { sequelize } from '../initSequelize';
 import { STRING, DATE, BOOLEAN, INTEGER } from 'sequelize';
-import { CaseModel } from '@/types/case';
+import { IncomeModel } from '@/types/income';
 import { uuid } from '@/utils';
 
-export const Case = sequelize.define<CaseModel>(
-  'case',
+export const Income = sequelize.define<IncomeModel>(
+  'income',
   {
     uid: {
       type: STRING,
@@ -24,36 +24,21 @@ export const Case = sequelize.define<CaseModel>(
        */
       unique: true
     },
-    caseCode: {
-      type: STRING,
+    caseCode: STRING(32),
+    incomeType: STRING(32),
+    moneyType: STRING(32),
+    amount: {
+      type: INTEGER,
       allowNull: false,
-      unique: true,
     },
-    caseType: STRING(32),
-    caseReason: STRING(9999999),
-    client: STRING(32),
-    clientFrom: STRING(32),
-    parties: STRING(32),
-    thirdPerson: STRING(32),
-    caseAmount: INTEGER,
-    casePrice: INTEGER,
-    payDate: DATE,
-    caseDate: DATE,
-    openDate: DATE,
-    caseLevel: STRING(32),
-    isSaveMoney: BOOLEAN,
-    isSaveProof: BOOLEAN,
-    courthouse: STRING(32),
-    judge: STRING(32),
-    proofDate: DATE,
-    transactors: STRING(32),
-    lawer: STRING(32),
-    source: STRING(32),
+    incomeDate: {
+      type: DATE,
+      allowNull: false,
+    },
+    custom: STRING(32),
+    incomeNumber: STRING(9999999),
+    handler: STRING(32),
     remark: STRING(9999999),
-    status: {
-      type: STRING,
-      defaultValue: '2',
-    },
     isDelete: BOOLEAN,
   },
   {
@@ -61,6 +46,6 @@ export const Case = sequelize.define<CaseModel>(
   }
 );
 
-Case.sync({
+Income.sync({
   alter: true
 });

@@ -7,12 +7,12 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { sequelize } from '../initSequelize';
-import { STRING, DATE, BOOLEAN, INTEGER } from 'sequelize';
-import { CaseModel } from '@/types/case';
+import { STRING, BOOLEAN } from 'sequelize';
+import { AdviserModel } from '@/types/adviser';
 import { uuid } from '@/utils';
 
-export const Case = sequelize.define<CaseModel>(
-  'case',
+export const Adviser = sequelize.define<AdviserModel>(
+  'adviser',
   {
     uid: {
       type: STRING,
@@ -24,36 +24,22 @@ export const Case = sequelize.define<CaseModel>(
        */
       unique: true
     },
-    caseCode: {
+    companyName: {
       type: STRING,
       allowNull: false,
-      unique: true,
     },
-    caseType: STRING(32),
-    caseReason: STRING(9999999),
-    client: STRING(32),
-    clientFrom: STRING(32),
-    parties: STRING(32),
-    thirdPerson: STRING(32),
-    caseAmount: INTEGER,
-    casePrice: INTEGER,
-    payDate: DATE,
-    caseDate: DATE,
-    openDate: DATE,
-    caseLevel: STRING(32),
-    isSaveMoney: BOOLEAN,
-    isSaveProof: BOOLEAN,
-    courthouse: STRING(32),
-    judge: STRING(32),
-    proofDate: DATE,
-    transactors: STRING(32),
+    companyType: STRING(32),
+    corporation: STRING(32),
+    contracter: STRING(32),
+    address: STRING(32),
+    sendCode: STRING(32),
+    phone: STRING(32),
+    email: STRING(32),
+    fax: STRING(32),
+    isUse: BOOLEAN,
+    isProxy: BOOLEAN,
     lawer: STRING(32),
-    source: STRING(32),
     remark: STRING(9999999),
-    status: {
-      type: STRING,
-      defaultValue: '2',
-    },
     isDelete: BOOLEAN,
   },
   {
@@ -61,6 +47,6 @@ export const Case = sequelize.define<CaseModel>(
   }
 );
 
-Case.sync({
+Adviser.sync({
   alter: true
 });

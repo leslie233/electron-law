@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "private": true,
   "author": "heiyehk",
-  "description": "I便笺拥有漂亮的过度效果，允许开启多个窗口方便在桌面端更方便的记录文字",
+  "description": "事务所管理系统",
   "main": "background.js",
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "electron-updater": "^5.0.1",
     "element-plus": "^2.2.9",
     "fs-extra": "^10.0.0",
+    "moment": "^2.29.4",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2",

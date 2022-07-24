@@ -8,11 +8,11 @@
  */
 import { sequelize } from '../initSequelize';
 import { STRING, DATE, BOOLEAN, INTEGER } from 'sequelize';
-import { CaseModel } from '@/types/case';
+import { OutcomeModel } from '@/types/outcome';
 import { uuid } from '@/utils';
 
-export const Case = sequelize.define<CaseModel>(
-  'case',
+export const Outcome = sequelize.define<OutcomeModel>(
+  'outcome',
   {
     uid: {
       type: STRING,
@@ -24,36 +24,21 @@ export const Case = sequelize.define<CaseModel>(
        */
       unique: true
     },
-    caseCode: {
+    outComeReason: {
       type: STRING,
       allowNull: false,
-      unique: true,
     },
-    caseType: STRING(32),
-    caseReason: STRING(9999999),
-    client: STRING(32),
-    clientFrom: STRING(32),
-    parties: STRING(32),
-    thirdPerson: STRING(32),
-    caseAmount: INTEGER,
-    casePrice: INTEGER,
-    payDate: DATE,
-    caseDate: DATE,
-    openDate: DATE,
-    caseLevel: STRING(32),
-    isSaveMoney: BOOLEAN,
-    isSaveProof: BOOLEAN,
-    courthouse: STRING(32),
-    judge: STRING(32),
-    proofDate: DATE,
-    transactors: STRING(32),
-    lawer: STRING(32),
-    source: STRING(32),
+    moneyType: STRING(32),
+    amount: {
+      type: INTEGER,
+      allowNull: false,
+    },
+    outcomeDate: {
+      type: DATE,
+      allowNull: false,
+    },
+    outcomeNumber: STRING(9999999),
     remark: STRING(9999999),
-    status: {
-      type: STRING,
-      defaultValue: '2',
-    },
     isDelete: BOOLEAN,
   },
   {
@@ -61,6 +46,6 @@ export const Case = sequelize.define<CaseModel>(
   }
 );
 
-Case.sync({
+Outcome.sync({
   alter: true
 });

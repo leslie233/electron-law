@@ -18,18 +18,10 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/',
-        name: 'index',
-        component: () => import('../views/index/index.vue'),
+        name: 'home',
+        component: () => import('../views/home/index.vue'),
         meta: {
-          title: 'I便笺'
-        }
-      },
-      {
-        path: '/editor',
-        name: 'editor',
-        component: () => import('../views/editor/index.vue'),
-        meta: {
-          title: ''
+          title: '事务所管理系统'
         }
       },
       {
@@ -55,7 +47,79 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '案件受理'
         }
-      }
+      },
+      {
+        path: '/custom',
+        name: 'custom',
+        component: () => import('../views/custom/index.vue'),
+        meta: {
+          title: '客户管理'
+        }
+      },
+      {
+        path: '/addCustom',
+        name: 'addCustom',
+        component: () => import('../views/custom/addCustom.vue'),
+        meta: {
+          title: '客户信息'
+        }
+      },
+      {
+        path: '/judge',
+        name: 'judge',
+        component: () => import('../views/judge/index.vue'),
+        meta: {
+          title: '法官管理'
+        }
+      },
+      {
+        path: '/addJudge',
+        name: 'addJudge',
+        component: () => import('../views/judge/addJudge.vue'),
+        meta: {
+          title: '法官信息'
+        }
+      },
+      {
+        path: '/adviser',
+        name: 'adviser',
+        component: () => import('../views/adviser/index.vue'),
+        meta: {
+          title: '法律顾问'
+        }
+      },
+      {
+        path: '/addAdviser',
+        name: 'addAdviser',
+        component: () => import('../views/adviser/addAdviser.vue'),
+        meta: {
+          title: '顾问信息'
+        }
+      },
+      {
+        path: '/finance',
+        name: 'finance',
+        component: () => import('../views/finance/index.vue'),
+        meta: {
+          title: '财务收支'
+        }
+      },
+      {
+        path: '/addIncome',
+        name: 'addIncome',
+        component: () => import('../views/finance/addIncome.vue'),
+        meta: {
+          title: '收入信息'
+        }
+      },
+      {
+        path: '/addOutcome',
+        name: 'addOutcome',
+        component: () => import('../views/finance/addOutcome.vue'),
+        meta: {
+          title: '支出信息'
+        }
+      },
     ]
   }
 ];

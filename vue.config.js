@@ -8,7 +8,7 @@ module.exports = {
       entry: 'src/main.ts',
       template: 'public/index.html',
       filename: 'index.html',
-      title: 'I便笺',
+      title: '事务所',
       chunks: ['chunk-vendors', 'chunk-common', 'index'],
       platform: process.platform
     }
@@ -32,7 +32,7 @@ module.exports = {
     electronBuilder: {
       nodeIntegration: true,
       builderOptions: {
-        productName: 'I便笺',
+        productName: '事务所',
         appId: 'com.inotes.heiyehk',
         copyright: 'heiyehk',
         compression: 'store', // "store" | "normal"| "maximum" 打包压缩情况(store 相对较快)，store 39749kb, maximum 39186kb
@@ -54,7 +54,7 @@ module.exports = {
           // installerHeaderIcon: './build/icons/aaa.ico', // 安装时头部图标
           createDesktopShortcut: true, // 创建桌面图标
           createStartMenuShortcut: true, // 创建开始菜单图标
-          shortcutName: 'I便笺' // 图标名称
+          shortcutName: '事务所' // 图标名称
         },
         publish: ['github']
       }

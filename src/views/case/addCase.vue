@@ -24,11 +24,12 @@
       </el-col>
       <el-col :span="8">
         <el-form-item label="案件类型" prop="caseType" style="width:100%">
-          <el-select v-model="condition.caseType" placeholder="请选择案件类型">
+          <el-select v-model="condition.caseType" placeholder="请选择案件类型" style="width:100%">
             <el-option label="刑事案件" value="刑事案件"></el-option>
             <el-option label="民事案件" value="民事案件"></el-option>
             <el-option label="行政案件" value="行政案件"></el-option>
             <el-option label="经济案件" value="经济案件"></el-option>
+            <el-option label="法律援助" value="法律援助"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -43,6 +44,20 @@
         </el-form-item>
       </el-col>
       <el-col :span="8">
+        <el-form-item label="委托人是" prop="clientFrom" style="width:100%">
+          <el-select v-model="condition.clientFrom" placeholder="请选择案件类型" style="width:100%">
+            <el-option label="一审原告" value="一审原告"></el-option>
+            <el-option label="一审被告" value="一审被告"></el-option>
+            <el-option label="二审原告" value="二审原告"></el-option>
+            <el-option label="二审被告" value="二审被告"></el-option>
+            <el-option label="终审原告" value="终审原告"></el-option>
+            <el-option label="终审被告" value="终审被告"></el-option>
+            <el-option label="第三人" value="第三人"></el-option>
+            <el-option label="申请人" value="申请人"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
         <el-form-item label="对方当事人" prop="parties" style="width:100%">
           <el-input v-model="condition.parties"></el-input>
         </el-form-item>
@@ -54,17 +69,18 @@
       </el-col>
       <el-col :span="8">
         <el-form-item label="诉讼标的" prop="caseAmount" style="width:100%">
-          <el-input-number v-model="condition.caseAmount" :min="0" />
+          <el-input-number style="width:100%" v-model="condition.caseAmount" :min="0" />
         </el-form-item>
       </el-col>
       <el-col :span="8">
         <el-form-item label="代理费用" prop="casePrice" style="width:100%">
-          <el-input-number v-model="condition.casePrice" :min="0" />
+          <el-input-number style="width:100%" v-model="condition.casePrice" :min="0" />
         </el-form-item>
       </el-col>
       <el-col :span="8">
         <el-form-item label="收费日期" prop="payDate" style="width:100%">
           <el-date-picker
+            style="width:100%"
             v-model="condition.payDate"
             type="date"
             format="YYYY-MM-DD"
@@ -74,6 +90,7 @@
       <el-col :span="8">
         <el-form-item label="受理日期" prop="caseDate" style="width:100%">
           <el-date-picker
+            style="width:100%"
             v-model="condition.caseDate"
             type="date"
             format="YYYY-MM-DD"
@@ -83,6 +100,7 @@
       <el-col :span="8">
         <el-form-item label="开庭日期" prop="openDate" style="width:100%">
           <el-date-picker
+            style="width:100%"
             v-model="condition.openDate"
             type="date"
             format="YYYY-MM-DD"
@@ -91,21 +109,21 @@
       </el-col>
       <el-col :span="8">
         <el-form-item label="审级" prop="caseLevel" style="width:100%">
-          <el-select v-model="condition.caseLevel" placeholder="请选择审级">
+          <el-select v-model="condition.caseLevel" placeholder="请选择审级" style="width:100%">
             <el-option label="一审" value="一审"></el-option>
             <el-option label="二审" value="二审"></el-option>
-            <el-option label="终审" value="终审"></el-option>
+            <el-option label="再审" value="再审"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
       <el-col :span="8">
         <el-form-item label="财产保全" prop="isSaveMoney" style="width:100%">
-          <el-checkbox v-model="condition.isSaveMoney" size="default" />
+          <el-checkbox :true-label="1" :false-label="0" v-model="condition.isSaveMoney" size="default" />
         </el-form-item>
       </el-col>
       <el-col :span="8">
         <el-form-item label="证据保全" prop="isSaveProof" style="width:100%">
-          <el-checkbox v-model="condition.isSaveProof" size="default" />
+          <el-checkbox :true-label="1" :false-label="0" v-model="condition.isSaveProof" size="default" />
         </el-form-item>
       </el-col>
       <el-col :span="8">
@@ -121,6 +139,7 @@
       <el-col :span="8">
         <el-form-item label="举证期限" prop="proofDate" style="width:100%">
           <el-date-picker
+            style="width:100%"
             v-model="condition.proofDate"
             type="date"
             format="YYYY-MM-DD"
@@ -198,24 +217,39 @@ export default defineComponent({
       rules: {
         caseCode: [{required: true, message: '案件编号不能为空', trigger: 'blur'}],
         caseReason: [{required: true, message: '案由不能为空', trigger: ['blur', 'change']}],
+        client: [{required: true, message: '委托人不能为空', trigger: 'blur'}],
+        caseDate: [{required: true, message: '受理日期不能为空', trigger: ['blur', 'change']}],
       },
     })
     const onSubmit = () => {
       (conditionRef.value as any).validate((valid: boolean) => {
         if (valid) {
-          const uuidString = uuid();
-          const createDefault = {
-            uid: uuidString,
-            ...state.condition,
-          };
-          Case.create(createDefault, {
-            raw: true
-          }).then(() => {
-            ElNotification.success('案件受理成功')
-            goCase()
-          }).catch(() => {
-            ElNotification.error('案件受理失败!')
-          })
+          if (state.condition.createdAt) {
+            Case.update(state.condition, {
+              where: {
+                uid: state.condition.uid
+              },
+            }).then(() => {
+              ElNotification.success('案件编辑成功')
+              goCase()
+            }).catch(() => {
+              ElNotification.error('案件编辑失败!')
+            })
+          } else {
+            const uuidString = uuid();
+            const createDefault = {
+              uid: uuidString,
+              ...state.condition,
+            };
+            Case.create(createDefault, {
+              raw: true
+            }).then(() => {
+              ElNotification.success('案件受理成功')
+              goCase()
+            }).catch(() => {
+              ElNotification.error('案件受理失败!')
+            })
+          }
         }
       })
     }
@@ -224,8 +258,20 @@ export default defineComponent({
         name: 'case',
       })
     };
+    const init = (uid: any) => {
+      Case.findOne({
+        raw: true,
+        where: {
+          uid,
+        },
+      }).then((res) => {
+        state.condition = res
+      })
+    }
     onMounted(() => {
-      // init()
+      if (router.currentRoute.value.params.uid) {
+        init(router.currentRoute.value.params.uid)
+      }
     })
     return {
       ...toRefs(state),
